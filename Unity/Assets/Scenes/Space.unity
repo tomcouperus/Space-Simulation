@@ -353,6 +353,7 @@ MonoBehaviour:
   mass: 333000
   radius: 636
   isStationary: 1
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1343250616
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a823ea8ee9c49259d919ac00a507ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeStep: 0.02
   celestialBodies: []
 --- !u!1 &1816059393
 GameObject:
@@ -530,7 +532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816059393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1380.9153, y: 0, z: 584.53375}
+  m_LocalPosition: {x: 1474.626, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -558,6 +560,7 @@ MonoBehaviour:
   mass: 1
   radius: 1
   isStationary: 0
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!54 &1816059396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -766,7 +769,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127933163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1377.0753, y: 0, z: 584.53375}
+  m_LocalPosition: {x: 1471, y: 0, z: 0}
   m_LocalScale: {x: 6.3, y: 6.3, z: 6.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -869,10 +872,11 @@ MonoBehaviour:
   periapsis: 1471
   eccentricity: 0.0167086
   inclination: 0
-  longitudeAscendingNode: 23
+  longitudeAscendingNode: 0
   mass: 15
   radius: 6.3
   isStationary: 0
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!96 &2127933170
 TrailRenderer:
   serializedVersion: 2
