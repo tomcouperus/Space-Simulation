@@ -8,6 +8,7 @@ public class SpaceSimulation : MonoBehaviour
     public static SpaceSimulation current;
     public static float G = 100f;
 
+    public float timeStep = 0.02f;
     public bool isInitialized { get; private set; }
     public CelestialBody[] celestialBodies;
 
@@ -46,7 +47,12 @@ public class SpaceSimulation : MonoBehaviour
         foreach (CelestialBody cb in celestialBodies)
         {
             if (cb.isStationary) continue;
-            cb.ApplyGravity();
+            cb.UpdateVelocity();
+        }
+        foreach (CelestialBody cb in celestialBodies)
+        {
+            if (cb.isStationary) continue;
+            cb.UpdatePosition();
         }
     }
 }

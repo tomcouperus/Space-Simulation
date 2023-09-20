@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CelestialBody : MonoBehaviour
 {
-
     Rigidbody rb;
 
     [Header("Orbit")]
@@ -42,6 +41,11 @@ public class CelestialBody : MonoBehaviour
     [Header("Simulation")]
     public bool isStationary;
 
+    //TODO make this into editor read-only thing
+    [Header("Info")]
+    [SerializeField]
+    Vector3 velocity;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,6 +58,7 @@ public class CelestialBody : MonoBehaviour
     /// </summary>
     public void SetInitialVelocity()
     {
+        velocity = Vector3.zero;
         foreach (CelestialBody other in SpaceSimulation.current.celestialBodies)
         {
             if (this == other) continue;
@@ -64,33 +69,33 @@ public class CelestialBody : MonoBehaviour
             float magnitudeV = Mathf.Sqrt(SpaceSimulation.G * m2 / r);
             Vector3 directionV = (other.transform.position - transform.position).normalized;
             directionV = Quaternion.AngleAxis(90, transform.up) * directionV;
-            Vector3 velocity = magnitudeV * directionV;
 
-            rb.velocity += velocity;
+            velocity += magnitudeV * directionV;
         }
     }
 
     /// <summary>
-    /// Applies the standard physics formula for gravity:
-    /// Fg = G * m1 * m2 / r^2
-    /// to each CelestialObject in the system
+    /// Updates the velocity of the body by applying the gravity caused by all other CelestialObjects in the simulation
     /// </summary>
-    public void ApplyGravity()
+    public void UpdateVelocity()
     {
         foreach (CelestialBody other in SpaceSimulation.current.celestialBodies)
         {
             if (this == other) continue;
 
-            float m1 = rb.mass;
             float m2 = other.rb.mass;
             float sqrDistance = (other.transform.position - transform.position).sqrMagnitude;
 
-            Vector3 directionFg = (other.transform.position - transform.position).normalized;
-            float magnitudeFg = SpaceSimulation.G * m1 * m2 / sqrDistance;
-            Vector3 Fg = magnitudeFg * directionFg;
+            Vector3 dirAcceleration = (other.transform.position - transform.position).normalized;
+            Vector3 acceleration = dirAcceleration * SpaceSimulation.G * m2 / sqrDistance;
 
-            rb.AddForce(Fg);
+            velocity += acceleration * SpaceSimulation.current.timeStep;
         }
+    }
+
+    public void UpdatePosition()
+    {
+        rb.MovePosition(rb.position + velocity * SpaceSimulation.current.timeStep);
     }
 
     public void SetInitialPositionCircular()
