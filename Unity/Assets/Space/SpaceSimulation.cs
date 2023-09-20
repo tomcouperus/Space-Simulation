@@ -11,6 +11,7 @@ public class SpaceSimulation : MonoBehaviour
     public float timeStep = 0.02f;
     public bool isInitialized { get; private set; }
     public CelestialBody[] celestialBodies;
+    public LagrangePoint[] lagrangePoints;
 
     private void Awake()
     {
@@ -21,12 +22,13 @@ public class SpaceSimulation : MonoBehaviour
         }
         current = this;
         celestialBodies = FindObjectsOfType<CelestialBody>();
+        lagrangePoints = FindObjectsOfType<LagrangePoint>();
         isInitialized = false;
     }
 
     private void Start()
     {
-        Debug.Log("Initializing");
+        Debug.Log("Initializing Celestial Bodies");
         TimeController.current.Pause();
         foreach (CelestialBody cb in celestialBodies)
         {
@@ -36,6 +38,11 @@ public class SpaceSimulation : MonoBehaviour
         {
             if (cb.isStationary) continue;
             cb.SetInitialVelocity();
+        }
+        Debug.Log("Initializing Lagrange Points");
+        foreach (LagrangePoint lp in lagrangePoints)
+        {
+            lp.SetPosition();
         }
         isInitialized = true;
         Debug.Log("Initialized Space Simulation");
@@ -53,6 +60,10 @@ public class SpaceSimulation : MonoBehaviour
         {
             if (cb.isStationary) continue;
             cb.UpdatePosition();
+        }
+        foreach (LagrangePoint lp in lagrangePoints)
+        {
+            lp.SetPosition();
         }
     }
 }
