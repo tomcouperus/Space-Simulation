@@ -86,9 +86,9 @@ public class CelestialBody : MonoBehaviour
     public void SetInitialPositionCircular()
     {
         if (orbitFocus == null) return;
-        float loanRad = orbitStartPosition * Mathf.Deg2Rad;
-        float x = Mathf.Cos(loanRad) * orbitRadius;
-        float z = Mathf.Sin(loanRad) * orbitRadius;
+        float angle = orbitStartPosition * Mathf.Deg2Rad;
+        float x = Mathf.Cos(angle) * orbitRadius;
+        float z = Mathf.Sin(angle) * orbitRadius;
         transform.position = orbitFocus.transform.position + new Vector3(x, 0, z);
     }
 
