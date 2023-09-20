@@ -12,25 +12,10 @@ public class CelestialBody : MonoBehaviour
     [SerializeField]
     CelestialBody orbitFocus;
     [SerializeField]
-    float apoapsis;
+    float orbitRadius;
     [SerializeField]
-    float periapsis;
-    [SerializeField]
-    [Tooltip("// TODO")]
-    float eccentricity;
-
-    float semiMajorAxis { get => (apoapsis + periapsis) / 2; }
-    float semiMinorAxis { get => semiMajorAxis * Mathf.Sqrt(1 - eccentricity * eccentricity); }
-
-    [SerializeField]
-    [Range(0, 180)]
-    [Tooltip("// TODO")]
-    float inclination;
-
-    [SerializeField]
-    [Range(-180, 180)]
-    [Tooltip("Place where the orbit ascends through its plane of reference, with respect to the positive x-axis.")]
-    float longitudeAscendingNode;
+    [Range(0, 360)]
+    float orbitStartPosition;
 
     [Header("Planet")]
     [SerializeField]
@@ -101,9 +86,9 @@ public class CelestialBody : MonoBehaviour
     public void SetInitialPositionCircular()
     {
         if (orbitFocus == null) return;
-        float loanRad = longitudeAscendingNode * Mathf.Deg2Rad;
-        float x = Mathf.Cos(loanRad) * periapsis;
-        float z = Mathf.Sin(loanRad) * periapsis;
+        float loanRad = orbitStartPosition * Mathf.Deg2Rad;
+        float x = Mathf.Cos(loanRad) * orbitRadius;
+        float z = Mathf.Sin(loanRad) * orbitRadius;
         transform.position = orbitFocus.transform.position + new Vector3(x, 0, z);
     }
 

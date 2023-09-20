@@ -345,11 +345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitFocus: {fileID: 0}
-  apoapsis: 0
-  periapsis: 0
-  eccentricity: 0
-  inclination: 0
-  longitudeAscendingNode: 0
+  orbitRadius: 0
+  orbitStartPosition: 0
   mass: 333000
   radius: 636
   isStationary: 1
@@ -532,7 +529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816059393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1474.626, y: 0, z: 0}
+  m_LocalPosition: {x: 1499.844, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -552,11 +549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitFocus: {fileID: 2127933169}
-  apoapsis: 4.054
-  periapsis: 3.626
-  eccentricity: 0.0549
-  inclination: 0
-  longitudeAscendingNode: 0
+  orbitRadius: 3.844
+  orbitStartPosition: 0
   mass: 1
   radius: 1
   isStationary: 0
@@ -769,7 +763,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127933163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1471, y: 0, z: 0}
+  m_LocalPosition: {x: 1496, y: 0, z: 0}
   m_LocalScale: {x: 6.3, y: 6.3, z: 6.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -868,11 +862,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitFocus: {fileID: 1043693784}
-  apoapsis: 1521
-  periapsis: 1471
-  eccentricity: 0.0167086
-  inclination: 0
-  longitudeAscendingNode: 0
+  orbitRadius: 1496
+  orbitStartPosition: 0
   mass: 15
   radius: 6.3
   isStationary: 0
