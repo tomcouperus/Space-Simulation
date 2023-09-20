@@ -10,12 +10,14 @@ public class CelestialBody : MonoBehaviour
 
     [Header("Orbit")]
     [SerializeField]
-    CelestialBody orbitFocus;
+    CelestialBody _orbitFocus;
+    public CelestialBody orbitFocus { get => _orbitFocus; }
     [SerializeField]
     float orbitRadius;
     [SerializeField]
-    [Range(0, 360)]
-    float orbitStartPosition;
+    [Range(-180, 180)]
+    float _angleInOrbit;
+    public float angleInOrbit { get => _angleInOrbit; }
 
     [Header("Planet")]
     [SerializeField]
@@ -81,15 +83,19 @@ public class CelestialBody : MonoBehaviour
     public void UpdatePosition()
     {
         rb.MovePosition(rb.position + velocity * SpaceSimulation.current.timeStep);
+
+        float dstX = rb.position.x - _orbitFocus.rb.position.x;
+        float dstZ = rb.position.z - _orbitFocus.rb.position.z;
+        _angleInOrbit = Mathf.Rad2Deg * Mathf.Atan2(dstZ, dstX);
     }
 
     public void SetInitialPositionCircular()
     {
-        if (orbitFocus == null) return;
-        float angle = orbitStartPosition * Mathf.Deg2Rad;
+        if (_orbitFocus == null) return;
+        float angle = _angleInOrbit * Mathf.Deg2Rad;
         float x = Mathf.Cos(angle) * orbitRadius;
         float z = Mathf.Sin(angle) * orbitRadius;
-        transform.position = orbitFocus.transform.position + new Vector3(x, 0, z);
+        transform.position = _orbitFocus.transform.position + new Vector3(x, 0, z);
     }
 
 #if UNITY_EDITOR
