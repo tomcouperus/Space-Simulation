@@ -11,6 +11,8 @@ public class CelestialBody : MonoBehaviour {
     [SerializeField]
     Transform _orbitFocus;
     public Transform orbitFocus { get => _orbitFocus; }
+
+    [Tooltip("In e6 km")]
     [SerializeField]
     float orbitRadius;
     [SerializeField]
@@ -19,10 +21,12 @@ public class CelestialBody : MonoBehaviour {
     public float angleInOrbit { get => _angleInOrbit; }
 
     [Header("Planet")]
+    [Tooltip("In e24 kg")]
     [SerializeField]
-    private float mass;
+    float mass;
+    [Tooltip("In e4 km")]
     [SerializeField]
-    private float radius;
+    float radius;
 
     [Header("Simulation")]
     public bool isStationary;
@@ -34,6 +38,8 @@ public class CelestialBody : MonoBehaviour {
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
+        rb.mass = mass;
+        rb.useGravity = false;
     }
 
     /// <summary>
@@ -92,7 +98,6 @@ public class CelestialBody : MonoBehaviour {
 
 #if UNITY_EDITOR
     private void OnValidate() {
-        if (rb != null) rb.mass = mass;
         transform.localScale = Vector3.one * radius;
         SetInitialPositionCircular();
     }
