@@ -4,14 +4,13 @@ using Unity.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class CelestialBody : MonoBehaviour
-{
+public class CelestialBody : MonoBehaviour {
     Rigidbody rb;
 
     [Header("Orbit")]
     [SerializeField]
-    CelestialBody _orbitFocus;
-    public CelestialBody orbitFocus { get => _orbitFocus; }
+    Transform _orbitFocus;
+    public Transform orbitFocus { get => _orbitFocus; }
     [SerializeField]
     float orbitRadius;
     [SerializeField]
@@ -33,8 +32,7 @@ public class CelestialBody : MonoBehaviour
     [SerializeField]
     Vector3 velocity;
 
-    void Awake()
-    {
+    void Awake() {
         rb = GetComponent<Rigidbody>();
     }
 
@@ -43,11 +41,9 @@ public class CelestialBody : MonoBehaviour
     /// by using the formula:
     /// v = sqrt(G * m2 / r)
     /// </summary>
-    public void SetInitialVelocity()
-    {
+    public void SetInitialVelocity() {
         velocity = Vector3.zero;
-        foreach (CelestialBody other in SpaceSimulation.current.celestialBodies)
-        {
+        foreach (CelestialBody other in SpaceSimulation.current.celestialBodies) {
             if (this == other) continue;
 
             float m2 = other.rb.mass;
@@ -64,10 +60,8 @@ public class CelestialBody : MonoBehaviour
     /// <summary>
     /// Updates the velocity of the body by applying the gravity caused by all other CelestialObjects in the simulation
     /// </summary>
-    public void UpdateVelocity()
-    {
-        foreach (CelestialBody other in SpaceSimulation.current.celestialBodies)
-        {
+    public void UpdateVelocity() {
+        foreach (CelestialBody other in SpaceSimulation.current.celestialBodies) {
             if (this == other) continue;
 
             float m2 = other.rb.mass;
@@ -80,17 +74,15 @@ public class CelestialBody : MonoBehaviour
         }
     }
 
-    public void UpdatePosition()
-    {
+    public void UpdatePosition() {
         rb.MovePosition(rb.position + velocity * SpaceSimulation.current.timeStep);
 
-        float dstX = rb.position.x - _orbitFocus.rb.position.x;
-        float dstZ = rb.position.z - _orbitFocus.rb.position.z;
+        float dstX = rb.position.x - _orbitFocus.position.x;
+        float dstZ = rb.position.z - _orbitFocus.position.z;
         _angleInOrbit = Mathf.Rad2Deg * Mathf.Atan2(dstZ, dstX);
     }
 
-    public void SetInitialPositionCircular()
-    {
+    public void SetInitialPositionCircular() {
         if (_orbitFocus == null) return;
         float angle = _angleInOrbit * Mathf.Deg2Rad;
         float x = Mathf.Cos(angle) * orbitRadius;
@@ -99,8 +91,7 @@ public class CelestialBody : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnValidate()
-    {
+    private void OnValidate() {
         if (rb != null) rb.mass = mass;
         transform.localScale = Vector3.one * radius;
         SetInitialPositionCircular();
