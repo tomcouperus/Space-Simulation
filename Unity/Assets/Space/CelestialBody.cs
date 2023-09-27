@@ -36,6 +36,10 @@ public class CelestialBody : MonoBehaviour {
     [SerializeField]
     Vector3 velocity;
 
+    
+    [SerializeField]
+    float velocityMagnitude;
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
         rb.mass = mass;
@@ -61,6 +65,7 @@ public class CelestialBody : MonoBehaviour {
 
             velocity += magnitudeV * directionV;
         }
+        velocityMagnitude = velocity.magnitude;
     }
 
     /// <summary>
@@ -77,6 +82,7 @@ public class CelestialBody : MonoBehaviour {
             Vector3 acceleration = dirAcceleration * SpaceSimulation.G * m2 / sqrDistance;
 
             velocity += acceleration * SpaceSimulation.current.timeStep;
+            velocityMagnitude = velocity.magnitude;
         }
     }
 
