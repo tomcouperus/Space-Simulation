@@ -747,7 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c8927c169bf4c13a5c88a3694aa4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbitFocus: {fileID: 2127933169}
+  _orbitFocus: {fileID: 0}
   orbitRadius: 3.844
   _angleInOrbit: 0
   mass: 1
@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c8927c169bf4c13a5c88a3694aa4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbitFocus: {fileID: 1043693784}
+  _orbitFocus: {fileID: 1043693778}
   orbitRadius: 1496
   _angleInOrbit: 0
   mass: 15
