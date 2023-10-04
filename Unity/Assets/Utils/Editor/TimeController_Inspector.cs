@@ -10,14 +10,8 @@ public class TimeController_Inspector : Editor {
         TimeController timeController = (TimeController) target;
 
         if (Application.isPlaying) {
-            if (GUILayout.Button("Slow-Motion")) {
-                timeController.PlaySlow();
-            }
             if (GUILayout.Button("Play")) {
                 timeController.Play();
-            }
-            if (GUILayout.Button("Fast")) {
-                timeController.PlayFast();
             }
             if (GUILayout.Button("Pause")) {
                 timeController.Pause();

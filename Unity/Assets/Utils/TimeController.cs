@@ -3,45 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class TimeController : MonoBehaviour
-{
+public class TimeController : MonoBehaviour {
     public static TimeController current;
 
-    [SerializeField]
-    [Range(0, 1)]
-    private float slowSpeed = 0.5f;
+    public List<float> timeScales = new List<float> { 1 };
 
     [SerializeField]
-    [Range(1, 100)]
-    private float fastSpeed = 2;
+    int _timeScaleIndex;
+    // The timescale of the game when it is actually playing. Only sets when Time.timeScale is not 0.
+    public int timeScaleIndex {
+        get => _timeScaleIndex;
+        set {
+            _timeScaleIndex = Mathf.Clamp(value, 0, timeScales.Count - 1);
+            if (Time.timeScale == 0) return;
+            Play();
+        }
+    }
 
-    private void Awake()
-    {
-        if (current != null)
-        {
+    private void Awake() {
+        if (current != null) {
             Destroy(this);
             return;
         }
         current = this;
+        timeScaleIndex = 0;
     }
 
-    public void Play()
-    {
-        Time.timeScale = 1;
+    public void Play() {
+        Time.timeScale = timeScales[timeScaleIndex];
     }
 
-    public void PlaySlow()
-    {
-        Time.timeScale = slowSpeed;
-    }
-
-    public void PlayFast()
-    {
-        Time.timeScale = fastSpeed;
-    }
-
-    public void Pause()
-    {
+    public void Pause() {
         Time.timeScale = 0;
     }
+
+#if UNITY_EDITOR
+    private void OnValidate() {
+        timeScaleIndex = _timeScaleIndex;
+    }
+#endif
 }
