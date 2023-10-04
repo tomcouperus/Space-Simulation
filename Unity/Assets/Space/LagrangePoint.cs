@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LagrangePoint : MonoBehaviour
-{
-    enum PointType
-    {
+public class LagrangePoint : MonoBehaviour {
+    enum PointType {
         // TODO L1, L2, L3, 
         L4, L5
     }
@@ -16,10 +14,8 @@ public class LagrangePoint : MonoBehaviour
     [SerializeField]
     PointType type;
 
-    public void SetPosition()
-    {
-        switch (type)
-        {
+    public void SetPosition() {
+        switch (type) {
             case PointType.L4:
                 SetPositionL4();
                 break;
@@ -29,8 +25,7 @@ public class LagrangePoint : MonoBehaviour
         }
     }
 
-    private void SetPositionL4()
-    {
+    private void SetPositionL4() {
         float angle = (parent.angleInOrbit + 60) * Mathf.Deg2Rad;
         float dst = (parent.orbitFocus.transform.position - parent.transform.position).magnitude;
         float x = Mathf.Cos(angle) * dst;
@@ -38,8 +33,7 @@ public class LagrangePoint : MonoBehaviour
 
         transform.position = parent.orbitFocus.transform.position + new Vector3(x, 0, z);
     }
-    private void SetPositionL5()
-    {
+    private void SetPositionL5() {
         float angle = (parent.angleInOrbit - 60) * Mathf.Deg2Rad;
         float dst = (parent.orbitFocus.transform.position - parent.transform.position).magnitude;
         float x = Mathf.Cos(angle) * dst;
@@ -49,8 +43,7 @@ public class LagrangePoint : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnValidate()
-    {
+    private void OnValidate() {
         SetPosition();
     }
 #endif

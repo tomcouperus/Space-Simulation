@@ -130,7 +130,8 @@ MonoBehaviour:
   _orbitFocus: {fileID: 0}
   orbitRadius: 0
   _angleInOrbit: 0
-  mass: 1988500
+  _mass: 1988500
   radius: 69.57
   isStationary: 1
   velocity: {x: 0, y: 0, z: 0}
+  velocityMagnitude: 0

@@ -131,10 +131,11 @@ MonoBehaviour:
   _orbitFocus: {fileID: 0}
   orbitRadius: 778.479
   _angleInOrbit: 0
-  mass: 1898.2
+  _mass: 1898.2
   radius: 6.9911
   isStationary: 0
   velocity: {x: 0, y: 0, z: 0}
+  velocityMagnitude: 0
 --- !u!96 &6551645006815599604
 TrailRenderer:
   serializedVersion: 2

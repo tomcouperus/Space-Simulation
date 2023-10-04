@@ -3,67 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TimeController))]
-public class SpaceSimulation : MonoBehaviour
-{
+public class SpaceSimulation : MonoBehaviour {
     public static SpaceSimulation current;
     public static float G = 100f;
 
     public float timeStep = 0.02f;
-    public bool isInitialized { get; private set; }
+    public bool isStarted { get; private set; }
     public CelestialBody[] celestialBodies;
     public LagrangePoint[] lagrangePoints;
 
-    private void Awake()
-    {
-        if (current != null)
-        {
+    private void Awake() {
+        if (current != null) {
             Destroy(this);
             return;
         }
         current = this;
         celestialBodies = FindObjectsOfType<CelestialBody>();
         lagrangePoints = FindObjectsOfType<LagrangePoint>();
-        isInitialized = false;
+        isStarted = false;
     }
 
-    private void Start()
-    {
-        Debug.Log("Initializing Celestial Bodies");
+    private void Start() {
+        Debug.Log("Initializing Space Simulation...");
         TimeController.current.Pause();
-        foreach (CelestialBody cb in celestialBodies)
-        {
-            cb.SetInitialPositionCircular();
-        }
-        foreach (CelestialBody cb in celestialBodies)
-        {
-            if (cb.isStationary) continue;
-            cb.SetInitialVelocity();
-        }
-        Debug.Log("Initializing Lagrange Points");
-        foreach (LagrangePoint lp in lagrangePoints)
-        {
-            lp.SetPosition();
-        }
-        isInitialized = true;
+        Debug.Log("... Celestial Body Positions");
+        SetInitialPositionsCircular();
+        Debug.Log("... Celestial Body Velocities");
+        SetInitialVelocities();
+        Debug.Log("... Lagrange Points");
+        SetLagrangePointPositions();
         Debug.Log("Initialized Space Simulation");
     }
 
-    private void FixedUpdate()
-    {
-        if (!isInitialized) return;
-        foreach (CelestialBody cb in celestialBodies)
-        {
-            if (cb.isStationary) continue;
-            cb.UpdateVelocity();
+    private void SetInitialPositionsCircular() {
+        foreach (CelestialBody cb in celestialBodies) {
+            if (!cb.gameObject.activeSelf) continue;
+            cb.SetInitialPositionCircular();
         }
-        foreach (CelestialBody cb in celestialBodies)
-        {
-            if (cb.isStationary) continue;
-            cb.UpdatePosition();
+    }
+
+    private void SetInitialVelocities() {
+        foreach (CelestialBody cb in celestialBodies) {
+            if (!cb.gameObject.activeSelf) continue;
+            cb.SetInitialVelocity();
         }
-        foreach (LagrangePoint lp in lagrangePoints)
-        {
+    }
+
+    private void SetLagrangePointPositions() {
+        foreach (LagrangePoint lp in lagrangePoints) {
+            if (!lp.gameObject.activeSelf) continue;
             lp.SetPosition();
         }
     }
+
+    private void UpdateVelocities() {
+        foreach (CelestialBody cb in celestialBodies) {
+            if (!cb.gameObject.activeSelf) continue;
+            cb.UpdateVelocity();
+        }
+    }
+
+    private void UpdatePositions() {
+        foreach (CelestialBody cb in celestialBodies) {
+            if (!cb.gameObject.activeSelf) continue;
+            cb.UpdatePosition();
+        }
+    }
+
+    public void StartSimulation() {
+        isStarted = true;
+        TimeController.current.Play();
+    }
+
+    private void FixedUpdate() {
+        if (!isStarted) return;
+        UpdateVelocities();
+        UpdatePositions();
+        SetLagrangePointPositions();
+    }
+
 }

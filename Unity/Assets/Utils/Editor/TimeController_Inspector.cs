@@ -4,29 +4,22 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(TimeController))]
-public class TimeController_Inspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
+public class TimeController_Inspector : Editor {
+    public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-        TimeController timeController = (TimeController)target;
+        TimeController timeController = (TimeController) target;
 
-        if (Application.isPlaying)
-        {
-            if (GUILayout.Button("Slow-Motion"))
-            {
+        if (Application.isPlaying) {
+            if (GUILayout.Button("Slow-Motion")) {
                 timeController.PlaySlow();
             }
-            if (GUILayout.Button("Play"))
-            {
+            if (GUILayout.Button("Play")) {
                 timeController.Play();
             }
-            if (GUILayout.Button("Fast"))
-            {
+            if (GUILayout.Button("Fast")) {
                 timeController.PlayFast();
             }
-            if (GUILayout.Button("Pause"))
-            {
+            if (GUILayout.Button("Pause")) {
                 timeController.Pause();
             }
         }
