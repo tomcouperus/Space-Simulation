@@ -30,9 +30,18 @@ public class SpaceSimulation : MonoBehaviour {
         SetInitialPositionsCircular();
         Debug.Log("... Celestial Body Velocities");
         SetInitialVelocities();
+        Debug.Log("... Applying Offsets");
+        ApplyInitialOffsets();
         Debug.Log("... Lagrange Points");
         SetLagrangePointPositions();
         Debug.Log("Initialized Space Simulation");
+    }
+
+    private void ApplyInitialOffsets() {
+        foreach (CelestialBody cb in celestialBodies) {
+            if (!cb.gameObject.activeSelf) continue;
+            cb.SetInitialOffsets();
+        }
     }
 
     private void SetInitialPositionsCircular() {

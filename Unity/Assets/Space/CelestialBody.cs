@@ -50,6 +50,13 @@ public class CelestialBody : MonoBehaviour {
     [SerializeField]
     float velocityMagnitude;
 
+    [Header("Offsets")]
+    [SerializeField]
+    Vector3 positionOffset;
+
+    [SerializeField]
+    Vector3 velocityOffset;
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
         rb.mass = _mass;
@@ -111,6 +118,11 @@ public class CelestialBody : MonoBehaviour {
         float x = Mathf.Cos(angle) * orbitRadius;
         float z = Mathf.Sin(angle) * orbitRadius;
         transform.position = _orbitFocus.transform.position + new Vector3(x, 0, z);
+    }
+
+    public void SetInitialOffsets() {
+        transform.position += positionOffset;
+        velocity += velocityOffset;
     }
 
     private void OnDrawGizmos() {
