@@ -86,7 +86,8 @@ public class SpaceSimulation : MonoBehaviour {
         Debug.Log("... Writing Initial Conditions");
         streamWriter.Write('[');
         streamWriter.Write(JsonUtility.ToJson(ToData()));
-        Debug.Log("Initialized Data Log...");
+        Debug.Log("Initialized Data Log");
+        Debug.LogWarning("To Finalize Data Log, Exit Play Mode");
     }
 
     private void FinalizeDataLog() {
