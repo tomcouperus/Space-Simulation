@@ -31,6 +31,13 @@ public class CelestialBody : MonoBehaviour {
     [SerializeField]
     float radius;
 
+    [Header("Offsets")]
+    [SerializeField]
+    Vector3 positionOffset;
+
+    [SerializeField]
+    Vector3 velocityOffset;
+
     //TODO make this into editor read-only thing
     [Header("Info")]
     [SerializeField]
@@ -39,13 +46,6 @@ public class CelestialBody : MonoBehaviour {
 
     [SerializeField]
     float velocityMagnitude;
-
-    [Header("Offsets")]
-    [SerializeField]
-    Vector3 positionOffset;
-
-    [SerializeField]
-    Vector3 velocityOffset;
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
@@ -119,10 +119,26 @@ public class CelestialBody : MonoBehaviour {
         Gizmos.DrawLine(transform.position, transform.position + velocity.normalized * 30);
     }
 
+    public CelestialBodyData ToData() {
+        CelestialBodyData data = new() {
+            name = gameObject.name,
+            position = transform.position,
+            velocity = velocity
+        };
+        return data;
+    }
+
 #if UNITY_EDITOR
     private void OnValidate() {
         transform.localScale = Vector3.one * radius;
         SetInitialPositionCircular();
     }
 #endif
+}
+
+[System.Serializable]
+public struct CelestialBodyData {
+    public string name;
+    public Vector3 position;
+    public Vector3 velocity;
 }

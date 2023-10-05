@@ -255,7 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a823ea8ee9c49259d919ac00a507ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simulationName: Basic Setup
+  runUntil: 10
   timeStep: 0.02
+  time: 0
   celestialBodies: []
   lagrangePoints: []
 --- !u!114 &1613390183

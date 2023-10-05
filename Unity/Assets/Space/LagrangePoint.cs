@@ -42,9 +42,23 @@ public class LagrangePoint : MonoBehaviour {
         transform.position = parent.orbitFocus.transform.position + new Vector3(x, 0, z);
     }
 
+    public LagrangePointData ToData() {
+        LagrangePointData data = new() {
+            name = gameObject.name,
+            position = transform.position
+        };
+        return data;
+    }
+
 #if UNITY_EDITOR
     private void OnValidate() {
         SetPosition();
     }
 #endif
+}
+
+[System.Serializable]
+public struct LagrangePointData {
+    public string name;
+    public Vector3 position;
 }
