@@ -26,9 +26,9 @@ public class SpaceSimulation : MonoBehaviour {
     private void Start() {
         Debug.Log("Initializing Space Simulation...");
         TimeController.current.Pause();
-        Debug.Log("... Celestial Body Positions");
+        Debug.Log("... Setting Positions");
         SetInitialPositionsCircular();
-        Debug.Log("... Celestial Body Velocities");
+        Debug.Log("... Calculating Velocities");
         SetInitialVelocities();
         Debug.Log("... Applying Offsets");
         ApplyInitialOffsets();
