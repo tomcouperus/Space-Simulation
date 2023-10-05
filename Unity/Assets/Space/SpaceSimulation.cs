@@ -3,18 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(TimeController))]
 public class SpaceSimulation : MonoBehaviour {
     public static SpaceSimulation current;
     public static float G = 100f;
-    [Header("Data")]
-    [SerializeField]
-    private string simulationName;
 
     private string filePath {
         get {
-            string safeName = simulationName
+            string safeName = SceneManager.GetActiveScene().name
                 .Replace(' ', '_')
                 .Replace(Path.DirectorySeparatorChar, '_')
                 .Replace(Path.AltDirectorySeparatorChar, '_')

@@ -1,4 +1,13 @@
 # Jupiter Asteroid Simulation
+
+## How to make experiment
+The base situation is the `Basic Setup` scene in the Unity project.
+Any time you want to test some deviation, copy the scene and rename it. 
+Follow the instructions in the Debug Log on what to do.
+The results of that simulation will be saved in the `Data` folder in a file with the same name as the scene.
+
+**Make sure to stop play mode in the editor to properly finish the json object**
+
 ## Data
 The following data is taken from Wikipedia.
 <!-- TODO: check if NASA's or spacereference.org has different data -->
