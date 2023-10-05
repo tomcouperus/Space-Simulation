@@ -22,16 +22,6 @@ public class CelestialBody : MonoBehaviour {
     float _angleInOrbit;
     public float angleInOrbit { get => _angleInOrbit; private set { _angleInOrbit = value; } }
 
-    // Returns the square orbital period according to Keppler's law of circular orbit
-    public float sqrOrbitalPeriod {
-        get {
-            float r3 = orbitRadius * orbitRadius * orbitRadius;
-            float pi2 = Mathf.PI * Mathf.PI;
-            float t2 = 4 * pi2 * r3 / (SpaceSimulation.G * orbitFocus.GetComponent<CelestialBody>().mass);
-            return t2;
-        }
-    }
-
     [Header("Planet")]
     [Tooltip("In e24 kg")]
     [SerializeField]
