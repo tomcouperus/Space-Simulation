@@ -189,14 +189,10 @@ PrefabInstance:
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: _orbitFocus
       value: 
-      objectReference: {fileID: 2076702986}
-    - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
-      propertyPath: orbitRadius
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1868080765}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: _angleInOrbit
-      value: 0
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: matchInitialVelocityMag
@@ -255,8 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a823ea8ee9c49259d919ac00a507ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simulationName: Basic Setup
-  runUntil: 10
+  runUntil: 12
   timeStep: 0.02
   time: 0
   celestialBodies: []
