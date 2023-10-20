@@ -38,6 +38,9 @@ public class CelestialBody : MonoBehaviour {
     [SerializeField]
     Vector3 velocityOffset;
 
+    [SerializeField]
+    float massOffset;
+
     //TODO make this into editor read-only thing
     [Header("Info")]
     [SerializeField]
@@ -49,7 +52,7 @@ public class CelestialBody : MonoBehaviour {
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        rb.mass = _mass;
+        rb.mass = _mass + massOffset;
         rb.useGravity = false;
     }
 

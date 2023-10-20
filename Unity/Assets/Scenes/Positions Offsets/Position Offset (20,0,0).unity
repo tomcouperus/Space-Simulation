@@ -648,6 +648,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
+      propertyPath: positionOffset.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: matchInitialVelocityMag
       value: 
       objectReference: {fileID: 911267168}
