@@ -716,16 +716,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
-      propertyPath: massOffset
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: _orbitFocus
       value: 
       objectReference: {fileID: 1868080765}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: _angleInOrbit
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
+      propertyPath: positionOffset.x
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: matchInitialVelocityMag

@@ -717,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: massOffset
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: _orbitFocus
