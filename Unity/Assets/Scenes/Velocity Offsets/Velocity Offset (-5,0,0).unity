@@ -499,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5893328538337000617, guid: 732284f6969cc46edbfb50b1047ce413, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 389.23947
+      value: -389.23956
       objectReference: {fileID: 0}
     - target: {fileID: 5893328538337000617, guid: 732284f6969cc46edbfb50b1047ce413, type: 3}
       propertyPath: m_LocalPosition.y
@@ -507,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5893328538337000617, guid: 732284f6969cc46edbfb50b1047ce413, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -674.1826
+      value: -674.18256
       objectReference: {fileID: 0}
     - target: {fileID: 5893328538337000617, guid: 732284f6969cc46edbfb50b1047ce413, type: 3}
       propertyPath: m_LocalRotation.w
@@ -728,8 +728,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
-      propertyPath: positionOffset.x
-      value: 10
+      propertyPath: velocityOffset.x
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 9097416390501658590, guid: a91bfe83a87444c30983c6aebe5139c0, type: 3}
       propertyPath: matchInitialVelocityMag
