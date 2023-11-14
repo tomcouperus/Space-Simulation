@@ -6,15 +6,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(TimeController))]
-public class SpaceSimulation : MonoBehaviour
-{
+public class SpaceSimulation : MonoBehaviour {
     public static SpaceSimulation current;
     public static float G = 100f;
 
-    private string filePath
-    {
-        get
-        {
+    private string filePath {
+        get {
             string safeName = SceneManager.GetActiveScene().name
                 .Replace(' ', '_')
                 .Replace(Path.DirectorySeparatorChar, '_')
@@ -48,10 +45,8 @@ public class SpaceSimulation : MonoBehaviour
 
     public Barycentre[] barycentres;
 
-    private void Awake()
-    {
-        if (current != null)
-        {
+    private void Awake() {
+        if (current != null) {
             Destroy(this);
             return;
         }
@@ -63,10 +58,8 @@ public class SpaceSimulation : MonoBehaviour
         isStarted = false;
     }
 
-    public void StartSimulation()
-    {
-        if (!isInitialized)
-        {
+    public void StartSimulation() {
+        if (!isInitialized) {
             Debug.Log("Initialization not finished. Please wait.");
             return;
         }
@@ -74,20 +67,17 @@ public class SpaceSimulation : MonoBehaviour
         TimeController.current.Play();
     }
 
-    private void Start()
-    {
+    private void Start() {
         InitializeSimulation();
         InitializeDataLog();
         isInitialized = true;
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         FinalizeDataLog();
     }
 
-    private void InitializeDataLog()
-    {
+    private void InitializeDataLog() {
         Debug.Log("Initializing Data Log...");
         Debug.Log("... Checking Data Directory");
         Directory.CreateDirectory(Path.GetDirectoryName(filePath));
@@ -101,8 +91,7 @@ public class SpaceSimulation : MonoBehaviour
         Debug.LogWarning("To Finalize Data Log, Exit Play Mode");
     }
 
-    private void FinalizeDataLog()
-    {
+    private void FinalizeDataLog() {
         Debug.Log("Finalizing Data Log...");
         Debug.Log("... Writing Closing Character");
         streamWriter.Write(']');
@@ -112,8 +101,7 @@ public class SpaceSimulation : MonoBehaviour
         Debug.Log("Finalized Data Log...");
     }
 
-    private void InitializeSimulation()
-    {
+    private void InitializeSimulation() {
         Debug.Log("Initializing Space Simulation...");
         TimeController.current.Pause();
         Debug.Log("... Setting Positions");
@@ -129,11 +117,10 @@ public class SpaceSimulation : MonoBehaviour
         Debug.Log("Initialized Space Simulation");
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         if (!isStarted) return;
-        UpdateVelocities();
         UpdatePositions();
+        UpdateVelocities();
         SetLagrangePointPositions();
         SetBarycentrePositions();
         time += timeStep;
@@ -144,89 +131,70 @@ public class SpaceSimulation : MonoBehaviour
         if (time >= runUntil) TimeController.current.Pause();
     }
 
-    private void ApplyInitialOffsets()
-    {
-        foreach (CelestialBody cb in celestialBodies)
-        {
+    private void ApplyInitialOffsets() {
+        foreach (CelestialBody cb in celestialBodies) {
             if (!cb.gameObject.activeSelf) continue;
             cb.SetInitialOffsets();
         }
     }
 
-    private void SetInitialPositionsCircular()
-    {
-        foreach (CelestialBody cb in celestialBodies)
-        {
+    private void SetInitialPositionsCircular() {
+        foreach (CelestialBody cb in celestialBodies) {
             if (!cb.gameObject.activeSelf) continue;
             cb.SetInitialPositionCircular();
         }
     }
 
-    private void SetInitialVelocities()
-    {
-        foreach (CelestialBody cb in celestialBodies)
-        {
+    private void SetInitialVelocities() {
+        foreach (CelestialBody cb in celestialBodies) {
             if (!cb.gameObject.activeSelf) continue;
             cb.SetInitialVelocity();
         }
     }
 
-    private void SetLagrangePointPositions()
-    {
-        foreach (LagrangePoint lp in lagrangePoints)
-        {
+    private void SetLagrangePointPositions() {
+        foreach (LagrangePoint lp in lagrangePoints) {
             if (!lp.gameObject.activeSelf) continue;
             lp.SetPosition();
         }
     }
 
-    private void SetBarycentrePositions()
-    {
-        foreach (Barycentre b in barycentres)
-        {
+    private void SetBarycentrePositions() {
+        foreach (Barycentre b in barycentres) {
             if (!b.gameObject.activeSelf) continue;
             b.SetPosition();
         }
     }
 
-    private void UpdateVelocities()
-    {
-        foreach (CelestialBody cb in celestialBodies)
-        {
+    private void UpdateVelocities() {
+        foreach (CelestialBody cb in celestialBodies) {
             if (!cb.gameObject.activeSelf) continue;
             cb.UpdateVelocity();
         }
     }
 
-    private void UpdatePositions()
-    {
-        foreach (CelestialBody cb in celestialBodies)
-        {
+    private void UpdatePositions() {
+        foreach (CelestialBody cb in celestialBodies) {
             if (!cb.gameObject.activeSelf) continue;
             cb.UpdatePosition();
         }
     }
 
-    public SpaceSimulationData ToData()
-    {
+    public SpaceSimulationData ToData() {
         List<CelestialBodyData> celestialBodyData = new();
-        foreach (CelestialBody cb in celestialBodies)
-        {
+        foreach (CelestialBody cb in celestialBodies) {
             celestialBodyData.Add(cb.ToData());
         }
         List<LagrangePointData> lagrangePointData = new();
-        foreach (LagrangePoint lp in lagrangePoints)
-        {
+        foreach (LagrangePoint lp in lagrangePoints) {
             lagrangePointData.Add(lp.ToData());
         }
         List<BarycentreData> barycentreData = new();
-        foreach (Barycentre b in barycentres)
-        {
+        foreach (Barycentre b in barycentres) {
             barycentreData.Add(b.ToData());
         }
 
-        SpaceSimulationData data = new()
-        {
+        SpaceSimulationData data = new() {
             time = time,
             celestialBodyData = celestialBodyData.ToArray(),
             lagrangePointData = lagrangePointData.ToArray(),
@@ -238,8 +206,7 @@ public class SpaceSimulation : MonoBehaviour
 }
 
 [System.Serializable]
-public struct SpaceSimulationData
-{
+public struct SpaceSimulationData {
     public float time;
     public CelestialBodyData[] celestialBodyData;
     public LagrangePointData[] lagrangePointData;
